@@ -1,0 +1,50 @@
+﻿<h1>Gestión de alumnos</h1>
+
+<!--Formulario de alumno-->
+<div style="width: 185px">
+    <fieldset>
+        <legend>{{accionForm}} alumno</legend>
+        <form #alumnoForm="ngForm">
+            <input type="text" [(ngModel)]="alumno.nombre" ngControl="nombre" placeholder="Nombre" required />
+            <br /><br />
+            <input type="text" [(ngModel)]="alumno.apellidos" ngControl="apellidos" placeholder="Apellidos" required />
+            <br /><br />
+            <input type="text" [(ngModel)]="alumno.nota" ngControl="nota" pattern="^\d*\.?\d*$" placeholder="Nota" required />
+            <br /><br />
+            <input type="button" value="Guardar" (click)="guardarAlumno()" [disabled]="!alumnoForm.form.valid" />
+        </form>
+    </fieldset>
+</div>
+
+<!--Listado de alumnos-->
+
+<div *ngIf="listaAlumnos.length > 0">
+    <br /><br /><h2>Lista de alumnos</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    Apellidos
+                </td>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    Nota
+                </td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="#alumno of listaAlumnos">
+                <td>{{alumno.apellidos}}</td>
+                <td>{{alumno.nombre}}</td>
+                <td>{{alumno.nota}}</td>
+                <td>
+                    <input type="button" value="Editar" (click)="editarAlumno(alumno)" />
+                    <input type="button" value="Borrar" (click)="borrarAlumno(alumno)" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
